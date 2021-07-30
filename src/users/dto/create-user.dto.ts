@@ -1,3 +1,4 @@
+import { Optional } from "@nestjs/common"
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator"
 
 export class CreateUserDto {
@@ -10,4 +11,7 @@ export class CreateUserDto {
   @MinLength(8, { message: "Your password is too short!" })
   @IsNotEmpty({ message: "Your password cannot be empty!" })
   password: string
+
+  @Optional()
+  role: string
 }
