@@ -45,4 +45,5 @@ export class UsersController {
   async findOne(@User() user: IUser) {
     return user
   }
+
 }

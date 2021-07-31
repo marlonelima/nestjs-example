@@ -1,18 +1,37 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { UsersController } from './users.controller';
+import faker from 'faker'
+import { UsersController } from './users.controller'
+import { UsersService } from './providers/users.service'
+import { AuthService } from 'src/auth/auth.service'
 
-// describe('UsersController', () => {
-//   let controller: UsersController;
+describe('UsersController', () => {
+  let usersController: UsersController
+  let usersService: UsersService
+  let authService: AuthService
 
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       controllers: [UsersController],
-//     }).compile();
+  beforeEach(async () => {
+    usersService = new UsersService(null)
+    authService = new AuthService(null, null)
 
-//     controller = module.get<UsersController>(UsersController);
-//   });
+    usersController = new UsersController(usersService, authService)
+  })
 
-//   it('should be defined', () => {
-//     expect(controller).toBeDefined();
-//   });
-// });
+  describe('findAll', () => {
+    it('should return an array of users', async () => {
+      const result = [
+        {
+          created_at: new Date(),
+          updated_at: new Date(),
+          email: faker.internet.email(),
+          name: faker.name.findName(),
+          password: faker.internet.password(),
+          id: faker.unique(() => Math.random() * 1000),
+          role: 'user',
+        },
+      ]
+
+      jest.spyOn(usersService, 'findAll').mockResolvedValue(result)
+
+      expect(await usersController.findAll()).toBe(result)
+    })
+  })
+})

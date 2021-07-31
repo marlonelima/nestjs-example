@@ -1,9 +1,14 @@
-import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common'
 
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service'
 
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { CreateUserDto } from '../dto/create-user.dto'
+import { UpdateUserDto } from '../dto/update-user.dto'
 
 @Injectable()
 export class UsersService {
@@ -22,20 +27,21 @@ export class UsersService {
   }
 
   async create(dto: CreateUserDto) {
-    const isNotUnique = await this.prisma.users.findFirst({ where: { email: dto.email } })
-    if (isNotUnique) throw new HttpException('E-mail already exists!', HttpStatus.BAD_REQUEST)
+    const isNotUnique = await this.prisma.users.findFirst({
+      where: { email: dto.email },
+    })
+
+    if (isNotUnique)
+      throw new HttpException('E-mail already exists!', HttpStatus.BAD_REQUEST)
 
     return await this.prisma.users.create({ data: dto })
   }
 
-  async update(id: number, dto: Omit<UpdateUserDto, "userId">) {
+  async update(id: number, dto: Omit<UpdateUserDto, 'userId'>) {
     try {
       return await this.prisma.users.update({ where: { id }, data: dto })
     } catch (err) {
       throw new BadRequestException()
     }
   }
-
-
-
 }

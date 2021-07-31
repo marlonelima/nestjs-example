@@ -1,14 +1,19 @@
+import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+
+import { UsersModule } from 'src/users/users.module';
+import { AuthModule } from '../src/auth/auth.module';
+
+import { PrismaService } from 'src/prisma/prisma.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [UsersModule, AuthModule],
+      providers: [PrismaService],
     }).compile();
 
     app = moduleFixture.createNestApplication();
