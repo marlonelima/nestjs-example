@@ -7,11 +7,11 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach NestJS WS",
+      "name": "Attach Jest WS",
       "restart": true,
-      "address": "127.0.0.1:9229/c820ee4c-f86f-40e6-97ce-9809d14dadf8",
+      "address": "127.0.0.1:9229/506a8891-3a65-4b4a-aa61-cfdf470d7e5b",
       "stopOnEntry": false,
-      "protocol": "auto",
+      "protocol": "auto"
     }
   ]
 }

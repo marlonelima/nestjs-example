@@ -55,28 +55,6 @@ describe('UsersController', () => {
     })
   })
 
-  describe('create', () => {
-    it('should return the created user', async () => {
-      const requestBody = {
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        role: 'user',
-      }
-
-      const response = {
-        id: 1,
-        created_at: new Date(),
-        updated_at: new Date(),
-        ...requestBody,
-      }
-
-      jest.spyOn(usersService, 'create').mockResolvedValue(response)
-
-      expect(await usersController.create(requestBody)).toBe(response)
-    })
-  })
-
   describe('update', () => {
     it('should return an updated user', async () => {
       const requestBody = {
@@ -99,6 +77,28 @@ describe('UsersController', () => {
       jest.spyOn(usersService, 'update').mockResolvedValue(response)
 
       expect(await usersController.update(requestBody)).toBe(response)
+    })
+  })
+
+  describe('create', () => {
+    it('should return the created user', async () => {
+      const requestBody = {
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        role: 'user',
+      }
+
+      const response = {
+        ...requestBody,
+        id: 3,
+        created_at: new Date(),
+        updated_at: new Date(),
+      }
+
+      jest.spyOn(usersService, 'create').mockResolvedValue(response)
+
+      expect(await usersController.create(requestBody)).toBe(response)
     })
   })
 })
