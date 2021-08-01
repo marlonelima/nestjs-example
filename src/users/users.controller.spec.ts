@@ -45,6 +45,7 @@ describe('UsersController', () => {
         id: 1,
         name: faker.name.findName(),
         email: faker.internet.email(),
+        password: faker.internet.password(),
         created_at: new Date(),
         updated_at: new Date(),
         role: 'admin',

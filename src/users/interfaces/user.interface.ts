@@ -20,5 +20,5 @@ export class IUser {
   updated_at: Date
 
   @ApiProperty()
-  role: 'admin' | 'user'
+  role: string
 }

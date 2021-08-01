@@ -21,15 +21,12 @@ import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { ILoggedUser } from './interfaces/loggeduser.interface'
 import {
-  ApiBasicAuth,
   ApiBearerAuth,
-  ApiHeader,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IUser } from './interfaces/user.interface'
-import { LoginUserDto } from './dto/login-user.dto'
 
 @ApiTags('users')
 @Controller('users')
