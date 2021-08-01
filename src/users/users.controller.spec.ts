@@ -102,3 +102,9 @@ describe('UsersController', () => {
     })
   })
 })
+
+afterAll(() => {
+  jest.clearAllMocks()
+  jest.resetAllMocks()
+  jest.restoreAllMocks()
+})
